@@ -11,13 +11,13 @@ namespace Campanula.Models
         /// このアプリケーションのConsumerKeyを取得します。
         /// </summary>
         internal static string ConsumerKey =>
-            "ConsumerKey";
+            "";
 
         /// <summary>
         /// このアプリケーションのConsumerSercretを取得します。
         /// </summary>
         internal static string ConsumerSercret =>
-            "ConsumerSercret";
+            "";
 
         /// <summary>
         /// トークンを保存します。
