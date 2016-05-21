@@ -16,8 +16,8 @@ namespace Campanula.Models
         /// <summary>
         /// このアプリケーションのConsumerSercretを取得します。
         /// </summary>
-        internal static string ConsumerSercret =>
-            "ConsumerSercret";
+        internal static string ConsumerSecret =>
+            "ConsumerSecret";
 
         /// <summary>
         /// トークンを保存します。
@@ -35,7 +35,7 @@ namespace Campanula.Models
         internal static Tokens GetTokens(long userId)
         {
             //DatabaseからTokenKeyとTokenSercretを取得
-            return Tokens.Create(ConsumerKey,ConsumerSercret,"accessToken","accessSercret");
+            return Tokens.Create(ConsumerKey,ConsumerSecret,"accessToken","accessSecret");
         }
     }
 }
