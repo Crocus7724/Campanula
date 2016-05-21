@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 using Xamarin.Forms;
 
 namespace Campanula
 {
-    public class App : Application
+    public partial class App : Application
     {
         public App()
         {
