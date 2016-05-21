@@ -3,7 +3,11 @@
 
 ##User Settings.
 Campanula/Campanula/Models/TwitterKeys.cs
-Campanula/Campanul/Campanula/Models/TwitterKeys.cs
+/Campanula/Campanul/Campanula/Models/TwitterKeys.cs
+TwitterKeys.cs
+TwitterKeys.*
+
+
 # User-specific files
 *.suo
 *.user

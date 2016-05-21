@@ -24,7 +24,7 @@ namespace Campanula.Models
         /// </summary>
         internal static void SaveToken(Tokens token)
         {
-            //Databaseに保存.
+            //Databaseに保存
         }
 
         /// <summary>
