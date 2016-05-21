@@ -35,7 +35,7 @@ namespace Campanula.Models
         internal static Tokens GetTokens(long userId)
         {
             //DatabaseからTokenKeyとTokenSercretを取得
-            return null;
+            return Tokens.Create(ConsumerKey,ConsumerSercret,"accessToken","accessSercret");
         }
     }
 }
