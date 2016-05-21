@@ -29,6 +29,8 @@ namespace Campanula
             };
 
             MainPage = new NavigationPage(content);
+
+            Initialize();
         }
 
         protected override void OnStart()
@@ -44,6 +46,11 @@ namespace Campanula
         protected override void OnResume()
         {
             // Handle when your app resumes
+        }
+
+        private void Initialize()
+        {
+            
         }
     }
 }
