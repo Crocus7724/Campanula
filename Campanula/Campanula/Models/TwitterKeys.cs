@@ -19,6 +19,8 @@ namespace Campanula.Models
         internal static string ConsumerSecret =>
             "ConsumerSecret";
 
+
+
         /// <summary>
         /// トークンを保存します。
         /// </summary>
