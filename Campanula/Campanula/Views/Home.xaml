@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:Campanula.ViewModels;assembly=Campanula"
+             xmlns:converter="clr-namespace:Campanula.Views.Converter;assembly=Campanula"
+             x:Class="Campanula.Views.Home">
+    <ContentPage.BindingContext>
+        <viewModels:HomeViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+      <ResourceDictionary>
+        <converter:DateTimeOffsetToNearTimeStringConverter x:Key="DateTimeOffsetToNearTimeStringConverter" />
+      </ResourceDictionary>
+    </ContentPage.Resources>
+    <StackLayout>
+        <ListView ItemsSource="{Binding TimeLine}" HasUnevenRows="True" Margin="5" 
+                  IsPullToRefreshEnabled="True"
+                  RefreshCommand="{Binding RefreshCommand}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Padding="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                            <Image Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"
+                                   Source="{Binding ProfileImageUrl}" 
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Start"/>
+                            <StackLayout Grid.Row="0" Grid.Column="1"
+                                         Orientation="Vertical"
+                                         HorizontalOptions="FillAndExpand">
+                              <Label Text="{Binding RetweetedUserName,StringFormat='Retweeted by {0}'}"
+                                     LineBreakMode="TailTruncation"
+                                     FontSize="Micro"
+                                     TextColor="Gray"
+                                     IsVisible="{Binding IsRetweet}"
+                                     HorizontalOptions="Center"></Label>
+                            <StackLayout 
+                                         Orientation="Horizontal"
+                                         HorizontalOptions="FillAndExpand">
+                                <Label Text="{Binding Name}" FontAttributes="Bold"
+                                       HorizontalOptions="Start" VerticalOptions="Center"
+                                       LineBreakMode="TailTruncation" />
+                                <Label Text="{Binding ScreenName,StringFormat='@{0}'}" FontSize="Micro"
+                                       HorizontalOptions="StartAndExpand" VerticalOptions="Center"
+                                       TextColor="Gray" LineBreakMode="NoWrap" />
+                                <Label Text="{Binding CreatedAt,Converter={StaticResource DateTimeOffsetToNearTimeStringConverter}}"
+                                       FontSize="Micro" TextColor="Gray"
+                                       HorizontalOptions="EndAndExpand" VerticalOptions="Center" 
+                                       LineBreakMode="NoWrap"/>
+                            </StackLayout>
+                              </StackLayout>
+
+                            <Label Grid.Row="1" Grid.Column="1" Text="{Binding Text}" />
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>

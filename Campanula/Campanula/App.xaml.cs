@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Campanula.Models;
+using Campanula.Models.Database;
+using Campanula.Views;
+using Realms;
 using Xamarin.Forms;
 
 namespace Campanula
@@ -13,22 +16,9 @@ namespace Campanula
         public App()
         {
             // The root page of your application
-            var content = new ContentPage
-            {
-                Title = "Campanula",
-                Content = new StackLayout
-                {
-                    VerticalOptions = LayoutOptions.Center,
-                    Children = {
-                        new Label {
-                            HorizontalTextAlignment = TextAlignment.Center,
-                            Text = "Welcome to Xamarin Forms!"
-                        }
-                    }
-                }
-            };
+            var home=new Home();
 
-            MainPage = new NavigationPage(content);
+            MainPage = new NavigationPage(home);
 
             Initialize();
         }
@@ -48,9 +38,12 @@ namespace Campanula
             // Handle when your app resumes
         }
 
-        private void Initialize()
+        private async void Initialize()
         {
-            
+            if (!TwitterClient.Current.User.IsExit)
+            {
+                 await MainPage.Navigation.PushModalAsync(new OAuthWebPage());
+            }
         }
     }
 }
