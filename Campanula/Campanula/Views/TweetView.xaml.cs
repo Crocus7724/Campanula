@@ -8,12 +8,11 @@ using Xamarin.Forms;
 
 namespace Campanula.Views
 {
-    public partial class Home : ContentPage
+    public partial class TweetView : ContentView
     {
-        public Home()
+        public TweetView()
         {
             InitializeComponent();
-            
         }
     }
 }

@@ -118,7 +118,21 @@ namespace Campanula.Models
 
         #endregion
 
+        #region UniqueId 変更通知プロパティ
 
+        private long _uniqueId;
+
+        public long UniqueId
+        {
+            get { return _uniqueId; }
+            set
+            {
+                _uniqueId = value;
+                OnPropertyChanged();
+            }
+        }
+
+        #endregion
 
         public Tweeted(Status status)
         {
@@ -131,6 +145,8 @@ namespace Campanula.Models
 
             CreatedAt = status.CreatedAt;
 
+            UniqueId = status.Id;
+            
             if (status.RetweetedStatus!=null) IsRetweeted = true;
 
             if (IsRetweeted)
@@ -139,6 +155,16 @@ namespace Campanula.Models
             }
 
             Text = status.Text;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return this.UniqueId==((Tweeted)obj).UniqueId;
+        }
+
+        public override int GetHashCode()
+        {
+            return (int)this.UniqueId;
         }
     }
 }

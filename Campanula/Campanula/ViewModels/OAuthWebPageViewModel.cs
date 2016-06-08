@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reactive.Linq;
 using System.Windows.Input;
 using Aster;
 using Aster.Messaging;
@@ -12,22 +13,23 @@ namespace Campanula.ViewModels
     {
         public Uri AuthorizeUrl { get; } = TwitterClient.Current.Session.AuthorizeUri;
 
-        public string Pin { get; set; }
+        public ReactiveProperty<string> Pin { get;}=new ReactiveProperty<string>();
 
-        public ICommand SubmitCommand { get; }
+        public ReactiveCommand SubmitCommand { get; }
 
         public OAuthWebPageViewModel()
         {
-            SubmitCommand = new Command(() =>
-            {
-                if (string.IsNullOrEmpty(Pin)) return;
+            SubmitCommand = Pin.Select(string.IsNullOrEmpty)
+                .ToReactiveCommand();
 
-                TwitterClient.Current.User = new User(Pin);
+            SubmitCommand.Subscribe(_ =>
+            {
+                TwitterClient.Current.User=new User(Pin.Value);
 
                 Messenger.Raise(new TransitionMessage("Pop"));
             });
 
-            
+
         }
     }
 }

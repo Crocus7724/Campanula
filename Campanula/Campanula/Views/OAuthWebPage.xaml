@@ -16,7 +16,7 @@
   </ContentPage.Behaviors>
   <StackLayout Orientation="Vertical">
     <WebView Source="{Binding AuthorizeUrl}" VerticalOptions="FillAndExpand"/>
-    <Entry Text="{Binding Pin,Mode=OneWayToSource}" Placeholder="PINコードを入力してください" />
+    <Entry Text="{Binding Pin.Value,Mode=OneWayToSource}" Placeholder="PINコードを入力してください" />
     <Button Text="送信" Command="{Binding SubmitCommand}" />
   </StackLayout>
 </ContentPage>

@@ -59,9 +59,9 @@ namespace Campanula.Models
 
         #region HomeTimeLine 変更通知プロパティ
 
-        private ObservableCollection<Tweeted> _homeTimeLine;
+        private HomeTimeLine _homeTimeLine;
 
-        public ObservableCollection<Tweeted> HomeTimeLine
+        public HomeTimeLine HomeTimeLine
         {
             get { return _homeTimeLine; }
             set
@@ -88,6 +88,8 @@ namespace Campanula.Models
         }
 
         #endregion
+        
+        public Tokens Token { get; set; }
 
         public User()
         {
@@ -109,17 +111,12 @@ namespace Campanula.Models
             Initialize(token);
         }
 
-        public void UpdateHomeTimeLine()
-        {
-            
-        }
-
         private void Initialize(Tokens token)
         {
-           
+            Token = token;
             ScreenName = token.ScreenName;
-            HomeTimeLine=new ObservableCollection<Tweeted>(token.Statuses.HomeTimelineAsync(count=>50).Result.Where(x => x!=null).Select(x=>new Tweeted(x)));
-
+            
+           HomeTimeLine=new HomeTimeLine(token.Statuses.HomeTimelineAsync(count=>50).Result.Where(x => x!=null).Select(x=>new Tweeted(x)),token.Streaming);
             var user = token.Users.ShowAsync(id => token.UserId).Result;
 
             Name = user.Name;
